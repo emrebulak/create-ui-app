@@ -1,0 +1,21 @@
+{
+  "name": "create-ui-app",
+  "version": "1.0.0",
+  "private": false,
+  "bin": {
+    "create-ui-app": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc", 
+    "dev": "tsc -w"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.8.0",
+    "@types/node": "^18.0.0"
+  },
+  "keywords": ["create-ui-app", "cli", "react", "typescript"],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

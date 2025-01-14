@@ -1,0 +1,50 @@
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { TextField, Button, Box } from '@mui/material';
+import { {{pascalCase name}} } from '../models/{{pascalCase name}}';
+
+const validationSchema = Yup.object().shape({
+{{#each fields}}
+  {{this.name}}: Yup.{{mapYup this.type}}().required('{{this.name}} is required'),
+{{/each}}
+});
+
+function {{pascalCase name}}Form() {
+  const formik = useFormik<{{pascalCase name}}>({
+    initialValues: {
+    {{#each fields}}
+      {{this.name}}: {{#if (eq this.type "string")}} "" {{else if (eq this.type "number")}} 0 {{else if (eq this.type "boolean")}} false {{else if (eq this.type "Date")}} new Date() {{else}} "" {{/if}},
+    {{/each}}
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      alert('Form submitted: ' + JSON.stringify(values, null, 2));
+    },
+  });
+
+  return (
+    <Box>
+      <h2>{{pascalCase name}} Form</h2>
+      <form onSubmit={formik.handleSubmit}>
+{{#each fields}}
+        <TextField
+          label="{{this.name}}"
+          name="{{this.name}}"
+          fullWidth
+          margin="normal"
+          value={formik.values.{{this.name}} }
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.{{this.name}} && Boolean(formik.errors.{{this.name}})}
+          helperText={formik.touched.{{this.name}} && formik.errors.{{this.name}} }
+        />
+{{/each}}
+        <Button variant="contained" color="primary" type="submit">
+          Save
+        </Button>
+      </form>
+    </Box>
+  );
+}
+
+export default {{pascalCase name}}Form;

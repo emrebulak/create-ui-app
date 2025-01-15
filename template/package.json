@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "plop": "plop"
+    "generate": "plop"
   },
   "dependencies": {
     "formik": "^2.4.6",
